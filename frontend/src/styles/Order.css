@@ -1,0 +1,66 @@
+.order-card {
+    display: flex;
+    justify-content: space-between; /* Space between title/info and actions */
+    align-items: center; /* Align items vertically */
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .order-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .order-title {
+    font-weight: bold;
+    margin: 0; /* Remove default margins */
+    font-size: 1rem;
+  }
+  
+  .order-info {
+    display: flex;
+    flex-direction: column; /* Stack status and time vertically */
+    gap: 5px; /* Add space between status and time */
+    flex: 2; /* Allow more space for the info section */
+  }
+  
+  .order-status,
+  .order-time {
+    font-size: 0.9rem; /* Adjust text size */
+    color: #555; /* Neutral color for readability */
+  }
+  
+  .order-actions {
+    display: flex;
+    gap: 10px; /* Add space between buttons */
+    align-items: center; /* Center buttons vertically */
+  }
+  
+  .order-actions .btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+  }
+  
+  .order-actions .btn.preparing {
+    background-color: #ffc107;
+    color: white;
+  }
+  
+  .order-actions .btn.preparing:hover {
+    background-color: #e0a800;
+  }
+  
+  .order-actions .btn.delivered {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .order-actions .btn.delivered:hover {
+    background-color: #218838;
+  }
+  

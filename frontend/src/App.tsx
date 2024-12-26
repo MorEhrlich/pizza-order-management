@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { fetchOrders ,updateOrderStatus } from './services/api'; // Import the fetch function
-import './App.css';
+import './styles/App.css';
 import OrderList from './components/OrderList';
 import OrderMap from './components/OrderMap';
+import Sidebar from './components/Sidebar';
 
 const App: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([]); // State to store fetched orders
@@ -52,27 +53,33 @@ const App: React.FC = () => {
   if (error) return <div>Error: {error}</div>; // Display error message if there's an issue
 
   return (
-    <div className="App-header">
-      <h1>Pizza Order Management</h1>
- <label>Sort By: </label>
-      <select onChange={(e) => setSortKey(e.target.value)} value={sortKey}>
-        <option value="title">Title</option>
-        <option value="status">Status</option>
-        <option value="orderTime">Order Time</option>
-      </select>
-      {/* Filtering Checkbox */}
-      <label>
-        <input
-          type="checkbox"
-          checked={showUndelivered}
-          onChange={() => setShowUndelivered(!showUndelivered)}
-        />
-        Show Only Undelivered Orders
-      </label>
+    <div className="app-container">
+           <Sidebar />
+      <main className="content">
+        <div className="controls">
+          <h1>Pizza Order Management</h1>
+      <div className="controls-bar">
+            <label>Sort By:</label>
+            <select onChange={(e) => setSortKey(e.target.value)} value={sortKey}>
+              <option value="title">Title</option>
+              <option value="status">Status</option>
+              <option value="orderTime">Order Time</option>
+            </select>
+            <label>
+              <input
+                type="checkbox"
+                checked={showUndelivered}
+                onChange={() => setShowUndelivered(!showUndelivered)}
+              />
+              Show Only Undelivered Orders
+            </label>
+          </div>
+        </div>
       {/* Order List */}
       <OrderList orders={sortedAndFilteredOrders} onUpdateStatus={handleUpdateStatus} />
       <h2>Order Locations</h2>
       <OrderMap orders={orders} />
+      </main>
     </div>
   );
 };
