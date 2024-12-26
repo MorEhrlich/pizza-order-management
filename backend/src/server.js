@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 let orders = Array.from({ length: 300 }, (_, i) => ({
   id: i + 1,
   title: `Order #${i + 1}`,
-  location: { lat: Math.random() * 90, lng: Math.random() * 180 },
+  location: { lat: Math.random() * 180 - 90, lng: Math.random() * 360 - 180},
   orderTime: new Date().toISOString(),
   status: 'Received',
   subItems: [{ title: 'Pizza', amount: 1, type: 'Food' }],
