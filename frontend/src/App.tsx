@@ -10,6 +10,7 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null); // State to store any errors
   const [sortKey, setSortKey] = useState<string>('title'); // Default sort key
   const [showUndelivered, setShowUndelivered] = useState(false); // Filter state
+  const [filterStatus, setFilterStatus] = useState<string>('all');
 
   // Fetch data when the component mounts
   useEffect(() => {
@@ -38,9 +39,14 @@ const App: React.FC = () => {
     }
   };
 
-  const filteredOrders = showUndelivered
-    ? orders.filter((order) => order.status !== 'Delivered')
-    : orders;
+  // const filteredOrders = showUndelivered
+  //   ? orders.filter((order) => order.status !== 'Delivered')
+  //   : orders;
+  const filteredOrders = filterStatus === 'all'
+  ? orders
+  : filterStatus === 'undelivered'
+  ? orders.filter((order) => order.status !== 'Delivered')
+  : orders.filter((order) => order.status === filterStatus);
 
   // Apply sorting
   const sortedAndFilteredOrders = [...filteredOrders].sort((a, b) => {
@@ -65,18 +71,29 @@ const App: React.FC = () => {
               <option value="status">Status</option>
               <option value="orderTime">Order Time</option>
             </select>
-            <label>
+            {/* <label>
               <input
                 type="checkbox"
                 checked={showUndelivered}
                 onChange={() => setShowUndelivered(!showUndelivered)}
               />
               Show Only Undelivered Orders
-            </label>
+            </label> */}
+            <label>Filter By Status:</label>
+            <select onChange={(e) => setFilterStatus(e.target.value)} value={filterStatus}>
+              <option value="undelivered">All Undelivered Orders</option>
+              <option value="all">All Orders</option>
+              <option value="Received">Received</option>
+              <option value="Preparing">Preparing</option>
+              <option value="Ready">Ready</option>
+              <option value="EnRoute">EnRoute</option>
+              <option value="Delivered">Delivered</option>
+            </select>
+
           </div>
         </div>
       {/* Order List */}
-      <OrderList orders={sortedAndFilteredOrders} onUpdateStatus={handleUpdateStatus} />
+      <OrderList orders={sortedAndFilteredOrders} onUpdateStatus={handleUpdateStatus}/>
       <h2>Order Locations</h2>
       <OrderMap orders={orders} />
       </main>

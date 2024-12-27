@@ -1,0 +1,43 @@
+/* Container for the status button or dropdown */
+.status-button-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Status Button */
+  .status-button {
+    width: 120px; /* Fixed width for consistent size */
+    height: 32px; /* Fixed height */
+    text-align: center;
+    padding: 5px 10px;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-transform: capitalize; /* Ensure the text is capitalized */
+    transition: background-color 0.2s ease;
+  }
+  
+  .status-button:hover {
+    filter: brightness(0.9); /* Slightly darken the button on hover */
+  }
+  
+  /* Status Select Dropdown */
+  .status-select {
+    width: 120px; /* Match the button width */
+    height: 32px; /* Match the button height */
+    padding: 5px;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  /* Focus Effect for Dropdown */
+  .status-select:focus {
+    outline: 2px solid #3498db;
+  }
+  

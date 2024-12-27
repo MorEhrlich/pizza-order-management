@@ -8,8 +8,7 @@ const Sidebar: React.FC = () => {
       <ul className="sidebar-menu">
         <li><a href="#dashboard">Dashboard</a></li>
         <li><a href="#orders">Orders</a></li>
-        <li><a href="#analytics">Analytics</a></li>
-        <li><a href="#settings">Settings</a></li>
+        <li><a href="#analytics">Orders Map</a></li>
       </ul>
     </div>
   );

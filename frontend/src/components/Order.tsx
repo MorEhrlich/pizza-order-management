@@ -1,32 +1,42 @@
-import React from 'react';
-import '../styles/Order.css'; // Use centralized styles
+import React, { useState } from 'react';
+import '../styles/Order.css';
+import StatusButton from './StatusButton';
+import OrderDetails from './OrderDetails';
+
+interface SubItem {
+  title: string;
+  amount: number;
+  type: string;
+}
 
 interface OrderProps {
   id: number;
   title: string;
   status: string;
   orderTime: string;
+  subItems: SubItem[];
   onUpdateStatus: (id: number, status: string) => void;
 }
 
-const Order: React.FC<OrderProps> = ({ id, title, status, orderTime, onUpdateStatus }) => {
+const Order: React.FC<OrderProps> = ({ id, title, status, orderTime, subItems, onUpdateStatus }) => {
+  const [expanded, setExpanded] = useState(false);
+
   return (
-    <div className="order-card">
-      <h3 className="order-title">{title}</h3>
-      <p className="order-status">
-        <strong>Status:</strong> {status}
-      </p>
-      <p className="order-time">
-        <strong>Order Time:</strong> {new Date(orderTime).toLocaleString()}
-      </p>
-      <div className="order-actions">
-        <button onClick={() => onUpdateStatus(id, 'Preparing')} className="btn preparing">
-          Mark as Preparing
-        </button>
-        <button onClick={() => onUpdateStatus(id, 'Delivered')} className="btn delivered">
-          Mark as Delivered
+    <div className={`order-card ${expanded ? 'expanded' : ''}`}>
+      <div className="order-summary">
+        <span className="order-id">{id}</span>
+        <span className="order-title">{title}</span>
+        <span className="order-time">{new Date(orderTime).toLocaleString()}</span>
+        <StatusButton
+          status={status}
+          onChangeStatus={(newStatus) => onUpdateStatus(id, newStatus)}
+        />
+        <button className="expand-btn" onClick={() => setExpanded(!expanded)}>
+          {expanded ? 'Hide Details' : 'Show Details'}
         </button>
       </div>
+
+      {expanded && <OrderDetails subItems={subItems} expanded={expanded} />}
     </div>
   );
 };
