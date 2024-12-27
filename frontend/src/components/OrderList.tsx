@@ -15,13 +15,13 @@ interface Props {
   onUpdateStatus: (id: number, status: string) => void;
   currentPage: number; 
   setCurrentPage: (page: number) => void; 
+  pageSize: number;
 }
 
-const OrderList: React.FC<Props> = ({ orders, onUpdateStatus, currentPage, setCurrentPage }) => {
-    const itemsPerPage = 10;
-    const totalPages = Math.ceil(orders.length / itemsPerPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const currentOrders = orders.slice(startIndex, startIndex + itemsPerPage);
+const OrderList: React.FC<Props> = ({ orders, onUpdateStatus, currentPage, setCurrentPage, pageSize }) => {
+    const totalPages = Math.ceil(orders.length / pageSize);
+    const startIndex = (currentPage - 1) * pageSize;
+    const currentOrders = orders.slice(startIndex, startIndex + pageSize);
   
     const handleNextPage = () => {
       if (currentPage < totalPages) {

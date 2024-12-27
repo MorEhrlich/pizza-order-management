@@ -6,6 +6,8 @@ interface ControlsBarProps {
   setSortKey: (value: string) => void;
   filterStatus: string;
   setFilterStatus: (value: string) => void;
+  pageSize: number;
+  setPageSize: (value: number) => void;
 }
 
 const ControlsBar: React.FC<ControlsBarProps> = ({
@@ -13,6 +15,8 @@ const ControlsBar: React.FC<ControlsBarProps> = ({
   setSortKey,
   filterStatus,
   setFilterStatus,
+  pageSize,
+  setPageSize,
 }) => {
   return (
     <div className="controls-bar">
@@ -34,6 +38,13 @@ const ControlsBar: React.FC<ControlsBarProps> = ({
         <option value="Ready">Ready</option>
         <option value="EnRoute">EnRoute</option>
         <option value="Delivered">Delivered</option>
+      </select>
+      <label>Items Per Page:</label>
+      <select onChange={(e) => setPageSize(Number(e.target.value))} value={pageSize}>
+        <option value={10}>10</option>
+        <option value={50}>50</option>
+        <option value={100}>100</option>
+        <option value={300}>300</option>
       </select>
     </div>
   );

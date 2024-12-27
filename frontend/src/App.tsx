@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const [sortKey, setSortKey] = useState<string>('orderTimeAsc'); 
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [currentPage, setCurrentPage] = useState<number>(1);
-
+  const [pageSize, setPageSize] = useState<number>(10);
 
   useEffect(() => {
     const loadOrders = async () => {
@@ -76,13 +76,17 @@ const App: React.FC = () => {
             setSortKey={setSortKey}
             filterStatus={filterStatus}
             setFilterStatus={setFilterStatus}
+            pageSize={pageSize} 
+            setPageSize={setPageSize} 
           />
         </div>
       <OrderList 
-          orders={sortedAndFilteredOrders} 
-          onUpdateStatus={handleUpdateStatus}    
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}/>
+        orders={sortedAndFilteredOrders}
+        onUpdateStatus={handleUpdateStatus}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        pageSize={pageSize}
+        />
       <h2>Order Locations</h2>
       <OrderMap orders={orders} />
       </main>
