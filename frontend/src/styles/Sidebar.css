@@ -11,7 +11,7 @@
   .sidebar h2 {
     font-size: 1.5rem;
     margin-bottom: 20px;
-    text-align: center;
+    text-align: left;
   }
   
   .sidebar-menu {
@@ -19,7 +19,9 @@
     padding: 0;
     margin: 0;
   }
-  
+  .sidebar-container {
+    display: flex;
+  }
   .sidebar-menu li {
     margin: 15px 0;
   }
@@ -34,3 +36,4 @@
   .sidebar-menu a:hover {
     color: #3498db;
   }
+ 

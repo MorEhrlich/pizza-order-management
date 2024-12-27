@@ -1,0 +1,18 @@
+.controls-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 15px 0;
+  }
+  
+  .controls-bar label {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .controls-bar select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  

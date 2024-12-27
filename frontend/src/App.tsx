@@ -1,32 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { fetchOrders ,updateOrderStatus } from './services/api'; // Import the fetch function
-import './styles/App.css';
+import { fetchOrders ,updateOrderStatus } from './services/api'; 
 import OrderList from './components/OrderList';
 import OrderMap from './components/OrderMap';
 import Sidebar from './components/Sidebar';
+import ControlsBar from './components/ControlsBar';
+import './styles/App.css';
 
 const App: React.FC = () => {
-  const [orders, setOrders] = useState<any[]>([]); // State to store fetched orders
-  const [error, setError] = useState<string | null>(null); // State to store any errors
-  const [sortKey, setSortKey] = useState<string>('title'); // Default sort key
-  const [showUndelivered, setShowUndelivered] = useState(false); // Filter state
+  const [orders, setOrders] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [sortKey, setSortKey] = useState<string>('orderTimeAsc'); 
   const [filterStatus, setFilterStatus] = useState<string>('all');
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  // Fetch data when the component mounts
+
   useEffect(() => {
     const loadOrders = async () => {
       try {
-        const data = await fetchOrders(); // Call the fetch function
-        setOrders(data); // Update state with the fetched data
+        const data = await fetchOrders(); 
+        setOrders(data);
       } catch (err: any) {
-        setError(err.message); // Handle errors
+        setError(err.message); 
       }
     };
 
     loadOrders();
-    const interval = setInterval(loadOrders, 5000); // Poll every 5 seconds
-    return () => clearInterval(interval); // Clean up on unmount
-  }, []); // Empty dependency array ensures this runs once on mount
+    const interval = setInterval(loadOrders, 5000); 
+    return () => clearInterval(interval); 
+  }, []); 
+
+  useEffect(() => {
+    setCurrentPage(1); 
+  }, [sortKey, filterStatus]);
+  
 
   const handleUpdateStatus = async (id: number, status: string) => {
     try {
@@ -39,24 +45,25 @@ const App: React.FC = () => {
     }
   };
 
-  // const filteredOrders = showUndelivered
-  //   ? orders.filter((order) => order.status !== 'Delivered')
-  //   : orders;
+  //filtering
   const filteredOrders = filterStatus === 'all'
   ? orders
   : filterStatus === 'undelivered'
   ? orders.filter((order) => order.status !== 'Delivered')
   : orders.filter((order) => order.status === filterStatus);
 
-  // Apply sorting
+  //sorting
   const sortedAndFilteredOrders = [...filteredOrders].sort((a, b) => {
-    if (sortKey === 'orderTime') {
-      return new Date(a.orderTime).getTime() - new Date(b.orderTime).getTime();
+    if (sortKey === 'orderTimeAsc') {
+      return new Date(a.orderTime).getTime() - new Date(b.orderTime).getTime(); 
     }
-    return a[sortKey].localeCompare(b[sortKey]);
+    if (sortKey === 'orderTimeDesc') {
+      return new Date(b.orderTime).getTime() - new Date(a.orderTime).getTime(); 
+    }
+    return a[sortKey].localeCompare(b[sortKey]); 
   });
 
-  if (error) return <div>Error: {error}</div>; // Display error message if there's an issue
+  if (error) return <div>Error: {error}</div>; 
 
   return (
     <div className="app-container">
@@ -64,36 +71,18 @@ const App: React.FC = () => {
       <main className="content">
         <div className="controls">
           <h1>Pizza Order Management</h1>
-      <div className="controls-bar">
-            <label>Sort By:</label>
-            <select onChange={(e) => setSortKey(e.target.value)} value={sortKey}>
-              <option value="title">Title</option>
-              <option value="status">Status</option>
-              <option value="orderTime">Order Time</option>
-            </select>
-            {/* <label>
-              <input
-                type="checkbox"
-                checked={showUndelivered}
-                onChange={() => setShowUndelivered(!showUndelivered)}
-              />
-              Show Only Undelivered Orders
-            </label> */}
-            <label>Filter By Status:</label>
-            <select onChange={(e) => setFilterStatus(e.target.value)} value={filterStatus}>
-              <option value="undelivered">All Undelivered Orders</option>
-              <option value="all">All Orders</option>
-              <option value="Received">Received</option>
-              <option value="Preparing">Preparing</option>
-              <option value="Ready">Ready</option>
-              <option value="EnRoute">EnRoute</option>
-              <option value="Delivered">Delivered</option>
-            </select>
-
-          </div>
+          <ControlsBar
+            sortKey={sortKey}
+            setSortKey={setSortKey}
+            filterStatus={filterStatus}
+            setFilterStatus={setFilterStatus}
+          />
         </div>
-      {/* Order List */}
-      <OrderList orders={sortedAndFilteredOrders} onUpdateStatus={handleUpdateStatus}/>
+      <OrderList 
+          orders={sortedAndFilteredOrders} 
+          onUpdateStatus={handleUpdateStatus}    
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}/>
       <h2>Order Locations</h2>
       <OrderMap orders={orders} />
       </main>

@@ -1,4 +1,4 @@
-/* Order List */
+
 .order-list {
     width: 100%;
     margin: 0 auto;
@@ -8,7 +8,6 @@
     /* padding: 10px; */
   }
   
-  /* List Headers */
   .order-list-header {
     display: flex;
     justify-content: space-between;
@@ -17,39 +16,37 @@
     font-size: 1rem;
     padding: 10px;
     border-bottom: 2px solid #ddd;
-    background-color: #333; /* Dark background */
-    color: #fff; /* White text for contrast */
-    border-radius: 8px 8px 8px 8px; /* Rounded top corners */
+    background-color: #333; 
+    color: #fff; 
+    border-radius: 8px 8px 8px 8px;
   }
   
   .order-list-header span {
-    flex: 1; /* Equal width for all columns */
-    text-align: center; /* Center-align header text */
+    flex: 1; 
+    text-align: center; 
   }
   
   .order-list-header span.header-id {
-    flex: 0.5; /* Smaller width for ID column */
+    flex: 0.5; 
     text-align: center;
   }
   
   .order-list-header span.header-title {
-    flex: 2; /* Larger width for the Title column */
-    text-align: left; /* Left-align Title */
+    flex: 2; 
+    text-align: left; 
   }
   
   .order-list-header span.header-actions {
-    flex: 1; /* Match the width of other smaller columns */
+    flex: 1; 
     text-align: center;
   }
   
-  /* Order Rows */
   .order-list .order-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    /* background: #f9f9f9; */
   }
   
   .order-list .order-card:last-child {
@@ -57,22 +54,22 @@
   }
   
   .order-list .order-card span {
-    flex: 1; /* Match the width of headers */
+    flex: 1; 
     text-align: center;
   }
   
   .order-list .order-card span.order-id {
-    flex: 0.5; /* Match the width of ID header */
+    flex: 0.5;
     text-align: center;
   }
   
   .order-list .order-card span.order-title {
-    flex: 2; /* Match the width of Title header */
-    text-align: left; /* Left-align Title */
+    flex: 2; 
+    text-align: left; 
   }
   
   .order-list .order-card span.order-actions {
-    flex: 1; /* Match the width of Actions header */
+    flex: 1; 
     text-align: center;
   }
 
@@ -92,26 +89,26 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9rem;
-    width: 100px; /* Fixed width for uniform size */
-    height: 40px; /* Fixed height for uniform size */
+    width: 100px; 
+    height: 40px;
     text-align: center;
     display: flex;
     justify-content: center;
-    align-items: center; /* Center-align text */
+    align-items: center; 
   }
   
   .pagination-btn:disabled {
     background-color: #ddd;
     cursor: not-allowed;
-    color: #999; /* Subtle text color for disabled state */
+    color: #999; 
   }
   
   .pagination-info {
     font-size: 0.9rem;
-    padding: 0 10px; /* Add spacing around the text */
+    padding: 0 10px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40px; /* Match button height for alignment */
+    height: 40px;
   }
   

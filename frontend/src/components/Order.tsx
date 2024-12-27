@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import '../styles/Order.css';
 import StatusButton from './StatusButton';
 import OrderDetails from './OrderDetails';
+import Modal from './Modal';
+import '../styles/Order.css';
 
 interface SubItem {
   title: string;
@@ -19,10 +20,13 @@ interface OrderProps {
 }
 
 const Order: React.FC<OrderProps> = ({ id, title, status, orderTime, subItems, onUpdateStatus }) => {
-  const [expanded, setExpanded] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
 
   return (
-    <div className={`order-card ${expanded ? 'expanded' : ''}`}>
+    <div className="order-card">
       <div className="order-summary">
         <span className="order-id">{id}</span>
         <span className="order-title">{title}</span>
@@ -31,12 +35,13 @@ const Order: React.FC<OrderProps> = ({ id, title, status, orderTime, subItems, o
           status={status}
           onChangeStatus={(newStatus) => onUpdateStatus(id, newStatus)}
         />
-        <button className="expand-btn" onClick={() => setExpanded(!expanded)}>
-          {expanded ? 'Hide Details' : 'Show Details'}
+        <button className="details-btn" onClick={() => setIsModalOpen(true)}>
+          View Details
         </button>
       </div>
-
-      {expanded && <OrderDetails subItems={subItems} expanded={expanded} />}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <OrderDetails id={id} title={title} orderTime={orderTime} subItems={subItems} />
+      </Modal>
     </div>
   );
 };

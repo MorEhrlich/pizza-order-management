@@ -13,27 +13,28 @@ interface OrderProps {
 interface Props {
   orders: OrderProps[];
   onUpdateStatus: (id: number, status: string) => void;
+  currentPage: number; 
+  setCurrentPage: (page: number) => void; 
 }
 
-const OrderList: React.FC<Props> = ({ orders, onUpdateStatus }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // Number of orders per page
-
-  const totalPages = Math.ceil(orders.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentOrders = orders.slice(startIndex, startIndex + itemsPerPage);
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+const OrderList: React.FC<Props> = ({ orders, onUpdateStatus, currentPage, setCurrentPage }) => {
+    const itemsPerPage = 10;
+    const totalPages = Math.ceil(orders.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentOrders = orders.slice(startIndex, startIndex + itemsPerPage);
+  
+    const handleNextPage = () => {
+      if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1);
+      }
+    };
+  
+    const handlePreviousPage = () => {
+      if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      }
+    };
+  
 
   return (
     <div className="order-list">

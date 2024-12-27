@@ -1,0 +1,17 @@
+.order-map-page {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .order-map-page h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  #map {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  

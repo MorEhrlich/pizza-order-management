@@ -9,14 +9,26 @@ interface SubItem {
 }
 
 interface OrderDetailsProps {
+  id: number;
+  title: string;
+  orderTime: string;
   subItems: SubItem[];
-  expanded: boolean;
+  // expanded: boolean;
 }
 
-const OrderDetails: React.FC<OrderDetailsProps> = ({ subItems, expanded }) => {
+// const OrderDetails: React.FC<OrderDetailsProps> = ({ subItems, expanded }) => {
+  const OrderDetails: React.FC<OrderDetailsProps> = ({ id, title, orderTime, subItems }) => {
   return (
-    <div className={`order-details ${expanded ? 'expanded' : ''}`}>
-         <h4>Order Details:</h4>
+    // <div className={`order-details ${expanded ? 'expanded' : ''}`}>
+    
+       <div className="order-details">
+        
+         <h3>Order Details:</h3>
+         <div className="order-info">
+        <p><strong>Order ID:</strong> {id}</p>
+        <p><strong>Title:</strong> {title}</p>
+        <p><strong>Reservation Time:</strong> {new Date(orderTime).toLocaleString()}</p>
+      </div>
     <div className="subitems-header">
       <span className="header-title">Title</span>
       <span className="header-amount">Amount</span>
