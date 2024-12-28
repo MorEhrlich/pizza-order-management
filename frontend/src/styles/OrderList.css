@@ -46,6 +46,14 @@
     flex: 1; 
   }
   
+  .order-list-summary {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
  
   .pagination-controls {
     display: flex;

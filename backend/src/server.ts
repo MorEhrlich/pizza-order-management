@@ -100,6 +100,7 @@ let orders = Array.from({ length: 300 }, (_, i) => {
     orderTime: generateOrderTime(i, baseTime), 
     status: ['Received', 'Preparing', 'Ready', 'EnRoute', 'Delivered'][Math.floor(Math.random() * 5)],
     subItems: generateRandomSubItems(),
+    lastUpdated: new Date().toISOString(),
   };
 });
 
@@ -115,6 +116,7 @@ app.post('/orders/:id/status', (req: Request, res: Response) => {
   const order = orders.find((order) => order.id === parseInt(id));
   if (order) {
     order.status = status;
+    order.lastUpdated = new Date().toISOString(); 
     res.json({ message: 'Status updated', order });
   } else {
     res.status(404).json({ message: 'Order not found' });

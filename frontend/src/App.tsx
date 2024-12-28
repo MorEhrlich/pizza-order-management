@@ -37,6 +37,42 @@ const App: React.FC = () => {
     setCurrentPage(1); 
   }, [sortKey, filterStatus]);
   
+  const fetchOrdersWithChangeDetection = async () => {
+    try {
+      const newOrders = await fetchOrders();
+  
+      setOrders((prevOrders) =>
+        newOrders.map((newOrder: { id: any; lastUpdated: any; }) => {
+          const existingOrder = prevOrders.find((order) => order.id === newOrder.id);
+          if (existingOrder && existingOrder.lastUpdated === newOrder.lastUpdated) {
+            return existingOrder; 
+          }
+  
+          return newOrder;
+        })
+      );
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(fetchOrdersWithChangeDetection, 5000);
+    return () => clearInterval(interval);
+  }, []);
+  
+  useEffect(() => {
+    const savedOrders = localStorage.getItem('orders');
+    if (savedOrders) {
+      setOrders(JSON.parse(savedOrders));
+    }
+  }, []);
+  
+  useEffect(() => {
+    localStorage.setItem('orders', JSON.stringify(orders));
+  }, [orders]);
+  
+
 
   const handleUpdateStatus = async (id: number, status: string) => {
     try {
@@ -48,6 +84,7 @@ const App: React.FC = () => {
       setError(err.message);
     }
   };
+
 
   //filtering
   const filteredOrders = filterStatus === 'all'
@@ -90,6 +127,7 @@ const App: React.FC = () => {
     "Delivered": orders.filter((order) => order.status === "Delivered").length,
   };
 
+  //error 
   if (error) return <div>Error: {error}</div>; 
 
   return (

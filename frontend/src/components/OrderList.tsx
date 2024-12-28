@@ -38,6 +38,9 @@ const OrderList: React.FC<Props> = ({ orders, onUpdateStatus, currentPage, setCu
 
   return (
     <div className="order-list">
+          {/* <div className="order-list-summary">
+        <h2>Total Orders: {orders.length}</h2> 
+      </div> */}
       <div className="order-list-header">
         <span className="header-id">ID</span>
         <span className="header-title">Title</span>
@@ -65,7 +68,7 @@ const OrderList: React.FC<Props> = ({ orders, onUpdateStatus, currentPage, setCu
           Previous
         </button>
         <span className="pagination-info">
-          Page {currentPage} of {totalPages}
+          Page {currentPage} of {totalPages}  <span style={{fontWeight: 'bold'}}> &nbsp; - &nbsp; Total {orders.length} Orders</span>
         </span>
         <button
           onClick={handleNextPage}

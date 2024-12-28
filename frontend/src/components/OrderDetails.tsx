@@ -39,7 +39,8 @@ interface OrderDetailsProps {
     <ul className="order-list">
       {subItems.map((item, index) => (
         <React.Fragment key={index}>
-          <li className="order-item base-item">
+          <li className="order-item base-item" style={{ fontWeight: "600" }}>
+
             <span>{item.title}</span>
             <span>{item.amount}</span>
             <span>{item.type}</span>
