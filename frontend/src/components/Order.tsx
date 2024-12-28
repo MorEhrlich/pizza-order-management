@@ -3,6 +3,7 @@ import StatusButton from './StatusButton';
 import OrderDetails from './OrderDetails';
 import Modal from './Modal';
 import '../styles/Order.css';
+import VisibilityIcon from '@mui/icons-material/VisibilitySharp';
 
 interface SubItem {
   title: string;
@@ -21,22 +22,27 @@ interface OrderProps {
 
 const Order: React.FC<OrderProps> = ({ id, title, status, orderTime, subItems, onUpdateStatus }) => {
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const [isModalOpen, setIsModalOpen] = useState(false);
 
-
+const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="order-card">
       <div className="order-summary">
         <span className="order-id">{id}</span>
-        <span className="order-title">{title}</span>
+        <button className="order-title-btn" onClick={handleOpenModal}>
+          {title}
+        </button>
         <span className="order-time">{new Date(orderTime).toLocaleString()}</span>
         <StatusButton
           status={status}
           onChangeStatus={(newStatus) => onUpdateStatus(id, newStatus)}
         />
         <button className="details-btn" onClick={() => setIsModalOpen(true)}>
-          View Details
+      
+          <VisibilityIcon />
         </button>
       </div>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>

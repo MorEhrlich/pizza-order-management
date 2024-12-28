@@ -103,7 +103,7 @@ let orders = Array.from({ length: 300 }, (_, i) => {
     title: `Order #${i + 1}`,
     location: { lat: Math.random() * 90, lng: Math.random() * 180 },
     orderTime: generateOrderTime(i, baseTime), 
-    status: 'Received',
+    status: ['Received', 'Preparing', 'Ready', 'EnRoute', 'Delivered'][Math.floor(Math.random() * 5)],
     subItems: generateRandomSubItems(),
   };
 });

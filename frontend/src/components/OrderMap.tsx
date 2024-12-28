@@ -1,12 +1,9 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-
-
-// Fix marker icon issue
 import L from 'leaflet';
 
-const DefaultIcon = L.Icon.Default.prototype as any; // Cast prototype to 'any' to override
+const DefaultIcon = L.Icon.Default.prototype as any; 
 delete DefaultIcon._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
@@ -37,7 +34,7 @@ const OrderMap: React.FC<Props> = ({ orders }) => {
         </Marker>
       ))}
     </MapContainer>
-  );
+  ); 
 };
 
 export default OrderMap;

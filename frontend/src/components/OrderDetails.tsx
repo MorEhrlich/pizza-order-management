@@ -13,16 +13,11 @@ interface OrderDetailsProps {
   title: string;
   orderTime: string;
   subItems: SubItem[];
-  // expanded: boolean;
 }
 
-// const OrderDetails: React.FC<OrderDetailsProps> = ({ subItems, expanded }) => {
   const OrderDetails: React.FC<OrderDetailsProps> = ({ id, title, orderTime, subItems }) => {
   return (
-    // <div className={`order-details ${expanded ? 'expanded' : ''}`}>
-    
        <div className="order-details">
-        
          <h3>Order Details:</h3>
          <div className="order-info">
         <p><strong>Order ID:</strong> {id}</p>
@@ -47,4 +42,4 @@ interface OrderDetailsProps {
   );
 };
 
-export default OrderDetails;// Ensure it's exported as default
+export default OrderDetails;

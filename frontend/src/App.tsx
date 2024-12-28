@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate  } from 'react-router-dom';
 import { fetchOrders ,updateOrderStatus } from './services/api'; 
 import OrderList from './components/OrderList';
-import OrderMap from './components/OrderMap';
 import Sidebar from './components/Sidebar';
 import ControlsBar from './components/ControlsBar';
+import StatisticsChart from './components/StatisticsChart'; 
+import ItemTypeChart from './components/ItemTypeChart';
+import OrderMapPage from './pages/OrderMapPage';
+import DashboardPage from './pages/DashboardPage';
 import './styles/App.css';
 
 const App: React.FC = () => {
@@ -63,14 +67,55 @@ const App: React.FC = () => {
     return a[sortKey].localeCompare(b[sortKey]); 
   });
 
+  //statistics 
+  const reservationStatistics = orders.reduce((acc: { [key: string]: number }, order) => {
+    acc[order.status] = (acc[order.status] || 0) + 1;
+    return acc;
+  }, {});
+
+  const itemTypeStatistics = orders.reduce((acc: { [key: string]: number }, order) => {
+    order.subItems.forEach((item: { type: string; amount: number }) => {
+      acc[item.type] = (acc[item.type] || 0) + item.amount;
+    });
+    return acc;
+  }, {});
+
+  const totalOrders = orders.length;
+
+  const additionalCounts = {
+    "Received": orders.filter((order) => order.status === "Received").length,
+    "Being Prepared": orders.filter((order) => order.status === "Being Prepared").length,
+    "Ready": orders.filter((order) => order.status === "Ready").length,
+    "EnRoute": orders.filter((order) => order.status === "EnRoute").length,
+    "Delivered": orders.filter((order) => order.status === "Delivered").length,
+  };
+
   if (error) return <div>Error: {error}</div>; 
 
   return (
+    <Router>
     <div className="app-container">
            <Sidebar />
       <main className="content">
+      <Routes>
+      <Route path="*" element={<Navigate to="/dashboard" />} />
+      <Route
+              path="/dashboard"
+              element={
+                <DashboardPage
+                  reservationStatistics={reservationStatistics}
+                  itemTypeStatistics={itemTypeStatistics}
+                  totalOrders={totalOrders}
+                  additionalCounts={additionalCounts}
+                />
+              }
+            />
+      <Route
+              path="/"
+              element={
+                <>
+      <h1>Pizza Order Management</h1>
         <div className="controls">
-          <h1>Pizza Order Management</h1>
           <ControlsBar
             sortKey={sortKey}
             setSortKey={setSortKey}
@@ -87,10 +132,14 @@ const App: React.FC = () => {
         setCurrentPage={setCurrentPage}
         pageSize={pageSize}
         />
-      <h2>Order Locations</h2>
-      <OrderMap orders={orders} />
+      </>
+          }
+          />
+      <Route path="/order-map" element={<OrderMapPage />} />
+      </Routes>
       </main>
     </div>
+    </Router>
   );
 };
 
