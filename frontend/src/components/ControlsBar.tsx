@@ -24,7 +24,6 @@ const ControlsBar: React.FC<ControlsBarProps> = ({
       <select onChange={(e) => setSortKey(e.target.value)} value={sortKey}>
         <option value="title">Title</option>
         <option value="status">Status</option>
-        {/* <option value="orderTime">Order Time</option> */}
         <option value="orderTimeAsc">Oldest to Newest</option> 
         <option value="orderTimeDesc">Newest to Oldest</option>
       </select>

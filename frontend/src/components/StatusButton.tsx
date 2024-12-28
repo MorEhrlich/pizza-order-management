@@ -18,15 +18,9 @@ interface StatusButtonProps {
 }
 
 const StatusButton: React.FC<StatusButtonProps> = ({ status, onChangeStatus }) => {
-//   const [isEditing, setIsEditing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(status);
 
-//   const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-//     const newStatus = event.target.value;
-//     onChangeStatus(newStatus); // Notify parent about the change
-//     setIsEditing(false); // Close dropdown immediately
-//   };
 
   const handleStatusUpdate = () => {
     if (selectedStatus !== status) {
@@ -35,31 +29,6 @@ const StatusButton: React.FC<StatusButtonProps> = ({ status, onChangeStatus }) =
     setIsModalOpen(false);
   };
   return (
-    // <div className="status-button-container">
-    //   {isEditing ? (
-    //     <select
-    //       className="status-select"
-    //       value={status}
-    //       onChange={handleStatusChange}
-    //       onBlur={() => setIsEditing(false)} 
-    //       autoFocus 
-    //     >
-    //       {STATUS_LIST.map((statusOption) => (
-    //         <option key={statusOption} value={statusOption}>
-    //           {statusOption}
-    //         </option>
-    //       ))}
-    //     </select>
-    //   ) : (
-    //     <button
-    //       className="status-button"
-    //       style={{ backgroundColor: STATUS_COLORS[status] }}
-    //       onClick={() => setIsEditing(true)}
-    //     >
-    //       {status}
-    //     </button>
-    //   )}
-    // </div>
     <div className="status-button-container">
       <button
         className="status-button"

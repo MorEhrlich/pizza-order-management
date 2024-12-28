@@ -13,7 +13,7 @@ import './styles/App.css';
 const App: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [sortKey, setSortKey] = useState<string>('orderTimeAsc'); 
+  const [sortKey, setSortKey] = useState<string>('orderTimeDesc'); 
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -84,7 +84,7 @@ const App: React.FC = () => {
 
   const additionalCounts = {
     "Received": orders.filter((order) => order.status === "Received").length,
-    "Being Prepared": orders.filter((order) => order.status === "Being Prepared").length,
+    "Preparing": orders.filter((order) => order.status === "Preparing").length,
     "Ready": orders.filter((order) => order.status === "Ready").length,
     "EnRoute": orders.filter((order) => order.status === "EnRoute").length,
     "Delivered": orders.filter((order) => order.status === "Delivered").length,
@@ -98,7 +98,7 @@ const App: React.FC = () => {
            <Sidebar />
       <main className="content">
       <Routes>
-      <Route path="*" element={<Navigate to="/dashboard" />} />
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route
               path="/dashboard"
               element={
@@ -111,10 +111,10 @@ const App: React.FC = () => {
               }
             />
       <Route
-              path="/"
+              path="/orders"
               element={
                 <>
-      <h1>Pizza Order Management</h1>
+      <h1 style={{textAlign: 'center'}}>Resturant Orders Management</h1>
         <div className="controls">
           <ControlsBar
             sortKey={sortKey}

@@ -27,7 +27,7 @@ const OrderMapPage: React.FC = () => {
 
   return (
     <div className="order-map-page">
-      <h1>Orders Locations Map</h1>
+      <h1 style={{fontSize: '35px'}}>Orders Locations Map</h1>
       {orders.length > 0 ? (
         <OrderMap orders={orders} />
       ) : (

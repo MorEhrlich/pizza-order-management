@@ -1,10 +1,35 @@
- .order-details {
-    overflow: visible; 
-    max-height: none;  
-    padding: 10px;    
-    width: 100%;      
+.order-details {
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+  }
+  .order-info{
+    text-align: left;
   }
  
+  .order-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-weight: bold;
+    padding: 10px 0;
+    border-bottom: 2px solid #ddd;
+    background-color: #f7f7f7;
+    margin-bottom: 10px;
+  }
+  
+  .order-header span {
+    flex: 1;
+    text-align: center;
+  }
+
+.orders-table{
+        margin-right: 35px;
+}
+
+
+  
   .subitems-header {
     display: flex;
     justify-content: space-between;
@@ -26,7 +51,7 @@
   
   .subitems-header span.header-title {
     flex: 2; 
-    text-align: left;
+    text-align: center;
   }
   
  
@@ -55,14 +80,47 @@
     flex: 1; 
     text-align: center;
     padding: 0 5px;
+    
   }
-  
+
+
   .order-details li span:first-child {
-    flex: 2; 
-    text-align: left;
+    text-align: center; 
+    padding: 0 5px;
   }
-  
   .order-details li:hover {
     background-color: #f1f1f1; 
+  }
+  
+  .order-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+
+  .toppings-list {
+    list-style: none;
+    padding-left: 20px;
+    margin: 5px 0;
+  }
+  
+  .topping-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  .topping-item span {
+    flex: 1;
+    text-align: center;
+    /* font-style: italic; */
+  }
+  
+  .topping-item span:first-child {
+    text-align: left;
   }
   

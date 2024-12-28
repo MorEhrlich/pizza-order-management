@@ -1,9 +1,9 @@
 .sidebar {
-    width: 250px; /* Fixed width for the sidebar */
+    width: 250px; 
     background-color: #2c3e50;
     color: #ecf0f1;
-    height: 100%; /* Stretch the sidebar to full height */
-    position: relative; /* Ensures it doesn't overlay content */
+    height: 100%; 
+    position: relative;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   }

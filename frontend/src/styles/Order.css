@@ -6,89 +6,53 @@
     padding: 15px;
     margin-bottom: 4px;
     transition: max-height 0.3s ease, padding 0.3s ease, border 0.3s ease;
-    /* background-color: #ffffff; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  */
   }
-
+  
   .order-summary {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between; 
     align-items: center;
     width: 100%;
-   gap: 15px; 
-    margin-right: 20px; 
+    gap: 0; 
   }
   
-  .order-summary span {
-    flex: 1;
+  .order-summary span,
+  .order-summary button {
+    flex: 1; 
     text-align: center;
   }
   
-  .order-summary span:first-child {
-    flex: 0.5;
-    text-align: center;
-  }
-  
-  .order-title {
-    font-weight: bold;
-    font-size: 1rem;
-  }
-  
-  .order-time {
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
+  .order-summary button.StatusButton {
+  width: auto; 
+  padding: 5px 10px; 
+  margin: 0 auto; 
+  text-align: center;
+}
   .order-title-btn {
     background: none;
     border: none;
-    color: black; 
-    text-align: center;
+    color: black;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    text-decoration: none; 
-  }
-  
-  .order-title-btn:hover {
-    color: #1d78c1; 
+    text-align: center;
     text-decoration: none;
   }
   
-  .order-title-btn:focus {
-    outline: none;
-    color: black; 
+  .order-title-btn:hover {
+    color: #1d78c1;
   }
-  /* .details-btn {
-    padding: 10px 20px; 
-    background-color: #3498db; 
-    color: white; 
-    border: none; 
-    border-radius: 4px; 
-    font-size: 0.9rem; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease, transform 0.2s ease; 
-    text-transform: capitalize;
-  }
-   */
-   .details-btn {
+  
+  .details-btn {
     background: transparent;
     border: none;
     color: #2c3e50;
-    cursor: pointer; 
-   }
-
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
   .details-btn:hover {
-    color: #1d78c1; 
-    transform: scale(1.05); 
+    color: #1d78c1;
+    transform: scale(1.05);
   }
   
-  /* .details-btn:active {
-    background-color: #0f5a91; 
-    transform: scale(0.95); 
-  } */
-  
-  /* .details-btn:focus {
-    outline: 2px solid #1d78c1; 
-  }
-   */

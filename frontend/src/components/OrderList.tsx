@@ -56,7 +56,6 @@ const OrderList: React.FC<Props> = ({ orders, onUpdateStatus, currentPage, setCu
           onUpdateStatus={onUpdateStatus}
         />
       ))}
-      {/* Pagination Controls */}
       <div className="pagination-controls">
         <button
           onClick={handlePreviousPage}

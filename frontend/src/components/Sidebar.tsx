@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
   /></h2>
       <ul className="sidebar-menu">
         <li><Link to="/dashboard">Dashboard</Link></li>
-        <li><Link to="/">Orders</Link></li>
+        <li><Link to="/orders">Orders</Link></li>
         <li> <Link to="/order-map">Orders Map</Link></li>
       </ul>
     </div>

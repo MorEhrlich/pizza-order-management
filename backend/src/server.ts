@@ -31,11 +31,13 @@ interface Order {
   subItems: SubItem[];
 }
 
-// Helper functions
+
+
 const generateRandomSubItems = (): SubItem[] => {
   const baseItems = [
     { title: 'Margherita Pizza', type: 'Pizza' },
     { title: 'Pepperoni Pizza', type: 'Pizza' },
+    { title: 'Spinach Pizza', type: 'Pizza' },
     { title: 'Caesar Salad', type: 'Salad' },
     { title: 'Greek Salad', type: 'Salad' },
     { title: 'Garden Salad', type: 'Salad' },
@@ -46,51 +48,44 @@ const generateRandomSubItems = (): SubItem[] => {
     { title: 'Extra Cheese', type: 'Topping' },
     { title: 'Olives', type: 'Topping' },
     { title: 'Bacon Topping', type: 'Topping' },
+    { title: 'Sweet Corn', type: 'Topping' },
+    { title: 'Broccoli', type: 'Topping' },
+    { title: 'Arugula', type: 'Topping' },
   ];
 
-  const randomBaseIndex = Math.floor(Math.random() * baseItems.length);
-  const baseItem = baseItems[randomBaseIndex];
+ const numBaseItems = Math.floor(Math.random() * 2) + 1;
+ const selectedBaseItems = Array.from({ length: numBaseItems }, () => {
+   const randomBaseIndex = Math.floor(Math.random() * baseItems.length);
+   return baseItems[randomBaseIndex];
+ });
 
-  const numToppings = Math.floor(Math.random() * 3) + 1;
-  const selectedToppings = Array.from({ length: numToppings }, () => {
-    const toppingIndex = Math.floor(Math.random() * toppings.length);
-    return { ...toppings[toppingIndex], amount: 1 };
-  });
+ 
+ const subItems = selectedBaseItems.map((baseItem) => {
 
-  return [{ ...baseItem, amount: 1 }, ...selectedToppings];
+   const numToppings = Math.floor(Math.random() * 3) + 1;
+   const availableToppings = [...toppings]; 
+
+ 
+   const selectedToppings = Array.from({ length: numToppings }, () => {
+     const randomIndex = Math.floor(Math.random() * availableToppings.length);
+     return {
+       ...availableToppings.splice(randomIndex, 1)[0], 
+       amount: 1, 
+     };
+   });
+
+  
+   return {
+     ...baseItem,
+     amount: Math.floor(Math.random() * 3) + 1, 
+     toppings: selectedToppings,
+   };
+ });
+
+ return subItems;
 };
 
-// const generateRandomSubItems2 = (): SubItem => {
-//   const baseItems = [
-//     { title: 'Margherita Pizza', type: 'Pizza' },
-//     { title: 'Pepperoni Pizza', type: 'Pizza' },
-//     { title: 'Caesar Salad', type: 'Salad' },
-//     { title: 'Greek Salad', type: 'Salad' },
-//     { title: 'Garden Salad', type: 'Salad' },
-//   ];
 
-//   const toppings = [
-//     { title: 'Mushroom Topping', type: 'Topping' },
-//     { title: 'Extra Cheese', type: 'Topping' },
-//     { title: 'Olives', type: 'Topping' },
-//     { title: 'Bacon Topping', type: 'Topping' },
-//   ];
-
-//   const randomBaseIndex = Math.floor(Math.random() * baseItems.length);
-//   const baseItem = baseItems[randomBaseIndex];
-
-//   const numToppings = Math.floor(Math.random() * 3) + 1;
-//   const selectedToppings = Array.from({ length: numToppings }, () => {
-//     const toppingIndex = Math.floor(Math.random() * toppings.length);
-//     return { ...toppings[toppingIndex], amount: Math.floor(Math.random() * 3) + 1 };
-//   });
-
-//   return {
-//     ...baseItem,
-//     amount: Math.floor(Math.random() * 3) + 1,
-//     toppings: selectedToppings,
-//   };
-// };
 const generateOrderTime = (index: number, baseTime: Date) => {
   const delay = index * 60000; 
   return new Date(baseTime.getTime() - delay).toISOString();
@@ -108,7 +103,7 @@ let orders = Array.from({ length: 300 }, (_, i) => {
   };
 });
 
-// API Endpoints
+
 app.get('/orders', (req: Request, res: Response) => {
   res.json(orders);
 });
@@ -126,7 +121,6 @@ app.post('/orders/:id/status', (req: Request, res: Response) => {
   }
 });
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
